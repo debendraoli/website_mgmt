@@ -1,0 +1,84 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+{% block contents %}
+
+<section class="section_gap features_area">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 text-center" data-aos="fade-down">
+					<div class="main_title" id="about">
+						<h2>About Us</h2>
+                        <p>{{ site_info.about_short|safe }}</p>
+					</div>
+				</div>
+			</div>
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<div class="left_features" data-aos="zoom-in-right">
+						<img class="img-fluid" src="{% static 'img/website-design.png' %}" alt="">
+					</div>
+				</div>
+				<div class="col-lg-5 offset-lg-1">
+                    <p data-aos="fade-up-left">{{ site_info.platform_info }}</p>
+                    {% for platform in platforms %}
+					<div class="single_feature">
+						<div class="feature_head" data-aos="zoom-in-left">
+                            <span class="{{ platform.icon }} fa-2x"></span>
+							<h4>{{ platform.name }}</h4>
+						</div>
+						<div class="feature_content" data-aos="zoom-out-left">
+							<p>{{ platform.short_description  }}</p>
+						</div>
+					</div>
+                    {% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+
+    <section class="recent_update_area" id="services">
+		<div class="container">
+			<div class="recent_update_inner" data-aos="flip-down" data-aos-delay="300">
+				<ul class="nav nav-tabs justify-content-center" id="servicesTab" role="tablist">
+                {% for service in services %}
+					<li class="nav-item">
+						<a class="nav-link{% if service.status is 2 %} active{% endif %}" id="{{ service.url }}-tab" data-toggle="tab" href="#{{ service.url }}" role="tab"
+                           aria-controls="{{ service.url }}"
+                           aria-selected="{% if service.status is 2 %}true{% else %}false{% endif %}">
+                            <i class="{{ service.icon }} fa-3x"></i>
+                            <h6>{{ service.name }}</h6>
+						</a>
+					</li>
+                {% endfor %}
+				</ul>
+				<div class="tab-content" id="servicesTabContent">
+                {% for service in services %}
+					<div class="tab-pane animated {{ service.animation }}{% if service.status is 2 %} show active{% endif %}" id="{{ service.url }}" role="tabpanel"
+                         aria-labelledby="{{ service.url }}-tab">
+						<div class="row recent_update_text align-items-center">
+							<div class="col-lg-5">
+								<div class="common_style">
+									<p class="line animated slideInLeft">{{ service.name }}</p>
+									<h3 class="animated zoomIn">{{ service.tag }}</h3>
+									<p class="animated slideInUp">{{ service.short_description }}</p>
+                                    {% if service.link %}
+									<a class="primary_btn" href="{{ service.link }}"><span>Learn More</span></a>
+                                    {% endif %}
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="chart_img">
+									<img class="img-fluid" src="{% static service.image %}" alt="">
+								</div>
+							</div>
+						</div>
+                    </div>
+                    {% endfor %}
+					</div>
+				</div>
+			</div>
+	</section>
+
+
+
+{% endblock contents %}

@@ -1,0 +1,31 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+{% block contents %}
+    <section class="bg-light-gray">
+      <div class="container">
+        <h3 class="heading">Current Vacancies</h3>
+      {% if not careers %}<div class="alert-info text-center">No vacancies</div>{% endif %}
+        <div class="row featured align-items-stretch justify-content-center">
+        {% load modulo %}
+            {% for career in careers %}
+          <div class="col-lg-4 mb-5 mb-lg-0">
+            <div class="box-image-text bg-visible full-height"
+                 data-aos="zoom-out-{% if forloop.counter|modulo == 1 %}right{% elif forloop.counter|modulo == 2 %}down{% elif forloop.counter|divisibleby:3 %}left{% endif %}">
+              <div class="top"><a href="{% url 'job-detail' career.id %}">
+                  <div class="image"><img src="{% static career.image %}" alt="" class="img-fluid"></div>
+                  <div class="bg"></div>
+                  <div class="logo"><img src="{% static career.image %}" alt="" style="max-width: 80px;"></div></a></div>
+              <div class="content">
+                <h5><a href="{% url 'job-detail' career.id %}">{{ career.position }}</a></h5>
+                <p class="featured__details"><i class="fa fa-map-marker job__location"></i>{{ career.location }}<span class="badge featured-badge badge-{{ career.format_level.badge }}">{{ career.format_level.text }}</span></p>
+                <p>{{ career.description_short }}</p>
+              </div>
+            </div>
+          </div>
+            {% endfor %}
+
+
+        </div>
+      </div>
+    </section>
+{% endblock contents %}

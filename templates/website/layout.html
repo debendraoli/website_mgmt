@@ -1,0 +1,181 @@
+{% load static %}<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {% for meta in page_details.parse_meta_tags %}
+      <meta {{ meta.key }}="{{ meta.key_name }}" content="{{ meta.content }}">
+  {% endfor %}
+    <meta property="og:title" content="Uptechsys Solutions Pvt. Ltd - A leading software company in Nepal, Web Application Development, Mobile Application Development, Android &amp; IOS Application development in Nepal">
+    <meta property="og:site_name" content="Uptechsys Pvt. Ltd.">
+    <meta property="og:url" content="https://uptechsys.com">
+    <meta property="og:description" content="We deliver world class solutions (Web and Mobile Application) to our global clients.">
+      <meta property="og:type" content="website">
+    <meta property="og:image" content="https://uptechsys.com/img/">
+	<meta property="title" content="Uptechsys Pvt. Ltd - A leading software company in Nepal, Web Application Development, Mobile Application Development, Android &amp; IOS Application development in Nepal">
+	<meta name="description" content="We deliver world class solutions (Web and Mobile Application) to our global clients.">
+	<meta property="fb:app_id" content="358213495004895">
+	<!--<link rel="apple-touch-icon" sizes="57x57" href="{% static 'img/favicons/apple-icon-57x57.png' %}">
+	<link rel="apple-touch-icon" sizes="60x60" href="{% static 'img/favicons/apple-icon-60x60.png' %}">
+	<link rel="apple-touch-icon" sizes="72x72" href="{% static 'img/favicons/apple-icon-72x72.png' %}">
+	<link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/favicons/apple-icon-76x76.png' %}">
+	<link rel="apple-touch-icon" sizes="114x114" href="{% static 'imgfavicons/apple-icon-114x114.png' %}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/favicons/apple-icon-120x120.pn' %}g">
+	<link rel="apple-touch-icon" sizes="144x144" href="{% static 'img/favicons/apple-icon-144x144.png' %}">
+	<link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/favicons/apple-icon-152x152.png' %}">
+	<link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/favicons/apple-icon-180x180.png' %}">
+	<link rel="icon" type="image/png" sizes="192x192"  href="{% static 'img/favicons/android-icon-192x192.png' %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicons/favicon-32x32.png' %}">
+	<link rel="icon" type="image/png" sizes="96x96" href="{% static 'img/favicons/favicon-96x96.png' %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/favicon-16x16.png' %}">
+	<link rel="manifest" href="{% static 'img/favicons/manifest.json' %}">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="{% static 'img/favicons/ms-icon-144x144.png' %}">-->
+	<meta name="theme-color" content="#ffffff">
+    <title>{% if page_details.title %}{{ page_details.title }} - {% endif %}Uptech Sys.</title>
+  {% block stylesheet %}
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+      <link rel="stylesheet" href="{% static 'vendors/linericon/style.css' %}">
+      <link rel="stylesheet" href="{% static 'vendors/owl-carousel/owl.carousel.min.css' %}">
+      <link rel="stylesheet" href="{% static 'vendors/lightbox/simpleLightbox.css' %}">
+      <link rel="stylesheet" href="{% static 'vendors/nice-select/css/nice-select.css' %}">
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  {% endblock stylesheet %}
+</head>
+  <body>
+      	<div id="page-preloader"><div class="page-preloader-spin"></div></div>
+
+      <header class="header_area">
+		<div class="main_menu" data-aos="fade-down">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+      <a class="navbar-brand logo_h" href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt="logo"><span>uptech sys.</span></a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarLinks"
+					 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+
+            <div class="collapse navbar-collapse navbar-collapse offset" id="navbarLinks">
+                <ul class="nav navbar-nav menu_nav justify-content-center">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}#about">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'index' %}#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'careers' %}">Careers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+      </div>
+        </div>
+    </nav>
+        </div>
+        </header>
+<section class="heroArea{% if request.path != '/' %} height-60{% endif %}">
+      <div class="overlay"></div>
+    <img src="{% static page_details.images %}" class="header-bg" alt="">
+      <div class="heroText" data-aos="flip-down">
+          <h1>
+              {% for each_heading_text in page_details.split_heading.first %}
+                  <span class="hero-items">{{ each_heading_text }}</span>
+              {% endfor %}
+              <span class="hero-items unique-hero-items">{{ page_details.split_heading.last }}</span>.
+
+          </h1>
+          <h5>
+              {{ page_details.tag_line }}.
+          </h5>
+      </div>
+      <a href="#{{ page_details.pk }}">
+          <div class="mouse">
+              <span></span>
+            </div>
+            </a>
+    </section>
+      {% block contents %}{% endblock contents %}
+
+     <a class="floating-contact" id="contact-float" href="{% url 'contact' %}">
+          <img src="{% static 'img/contact-us-icon.png' %}" alt="" data-aos="fade-left">
+          <span>Contact Us</span>
+      </a>
+
+      <footer class="footer_area" data-aos="fade-up" data-aos-delay="400">
+		<div class="container">
+			<div class="row footer_inner">
+				<div class="col-lg-5 col-sm-6">
+					<aside class="f_widget ab_widget">
+						<div class="f_title">
+							<h3>Uptechsys Pvt. Ltd.</h3>
+						</div>
+						<p>{{ site_info.about_short|safe }}</p>
+					</aside>
+				</div>
+				<div class="col-lg-5 col-sm-6">
+					<aside class="f_widget">
+						<div class="f_title">
+							<h3>Sitemap</h3>
+						</div>
+						<ul class="list">
+							<li><a href="{% url 'index' %}#about">About</a></li>
+							<li><a href="{% url 'contact' %}">Contact</a></li>
+							<li><a href="#">Clients</a></li>
+							<li><a href="#">Latest Works</a></li>
+						</ul>
+					</aside>
+				</div>
+				<div class="col-lg-2">
+					<aside class="f_widget social_widget">
+						<div class="f_title">
+							<h3>Follow Us</h3>
+						</div>
+						<p>Let us be social</p>
+						<ul class="list">
+							<li><a href="{{ site_info.process_info.social_sites.facebook }}"><i class="fab fa-facebook-f fa-2x"></i></a></li>
+							<li><a href="{{ site_info.social_links.twitter }}"><i class="fab fa-twitter fa-2x"></i></a></li>
+							<li><a href="{{ site_info.social_links.linkedin }}"><i class="fab fa-linkedin fa-2x"></i></a></li>
+						</ul>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</footer>
+      <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    {% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+    <script defer src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/stellar.js' %}"></script>
+    <script src="{% static 'vendors/lightbox/simpleLightbox.min.js' %}"></script>
+    <script src="{% static 'vendors/nice-select/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'vendors/isotope/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendors/isotope/isotope-min.js' %}"></script>
+    <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendors/jquery-ui/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'vendors/counter-up/jquery.waypoints.min.js' %}"></script>
+        <script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.js"></script>
+  {% endblock scripts %}
+      <script>
+          let current_path = "{{ request.path }}";
+          if (current_path === window.location.pathname) {
+              $("a[href='"+current_path+"']").prop("href", "#").closest('li').addClass("nav-item active");
+          }
+    </script>
+      <script src="{% static 'js/main.js' %}"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-85360589-3"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-85360589-3');
+      </script>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+[Unit]
+Description=uWsgi instance to serve website mgmt.
+After=network.target
+
+[Service]
+User=website_mgmt
+Group=www-data
+WorkingDirectory=/home/website_mgmt/uptechsys.com
+Environment="PATH=/home/website_mgmt/website_mgmt.com/venv/bin"
+ExecStart=/home/website_mgmt/website_mgmt/.venv/bin/uwsgi --ini website_mgmt.ini
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,937 @@
+{% extends 'website/layout.html' %}
+{% block contents %}
+    {% load static %}
+    <style>
+    html {
+  font-size: 62.5%;
+}
+
+.job-details-bg {
+  background: #f7f9fc;
+}
+    .padding-top-60 {
+  padding-top: 60px;
+}
+    .section-padding-60 {
+  padding: 60px 0;
+    }
+    .job-listing-details {
+  background: #ffffff;
+  padding: 30px;
+  -webkit-box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.03);
+  box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.03);
+}
+
+.job-title-and-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.job-title-and-info .title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.job-title-and-info .title .thumb {
+  width: 100px;
+  height: 100px;
+  border-radius: 3px;
+  background: #f9f9f9;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.job-title-and-info .title .title-body h4 {
+  font-size: 2.6rem;
+  font-weight: 500;
+  padding-bottom: 15px;
+}
+
+.job-title-and-info .title .title-body .job-info span {
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  margin-right: 15px;
+  color: #6f7484;
+}
+
+.job-title-and-info .title .title-body .job-info span svg {
+  height: 15px;
+  margin-right: 5px;
+}
+
+.job-title-and-info .title .title-body .job-info span.full-time svg {
+  color: #ff9247;
+}
+
+.job-title-and-info .title .title-body .job-info span.temporary svg {
+  color: #ff5377;
+}
+
+.job-title-and-info .title .title-body .job-info span.part-time svg {
+  color: #6e75d0;
+}
+
+.job-title-and-info .title .title-body .job-info span.freelance svg {
+  color: #82d219;
+}
+
+.job-title-and-info .buttons .apply {
+  padding: 15px 30px;
+  border-radius: 3px;
+  background: rgba(36, 109, 248, 0.15);
+  color: #246df8;
+  font-size: 1.4rem;
+  border: 1px solid rgba(36, 109, 248, 0.15);
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+.job-title-and-info .buttons .apply svg {
+  height: 18px;
+  margin-left: 10px;
+}
+
+.job-title-and-info .buttons .apply:hover {
+  color: #ffffff;
+  background: #246df8;
+}
+
+.job-title-and-info .buttons .save {
+  padding: 15px 30px;
+  border-radius: 3px;
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(247, 249, 252, 0)), to(#f7f9fc));
+  background-image: -webkit-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: -o-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: linear-gradient(to left, rgba(247, 249, 252, 0), #f7f9fc);
+  color: #6f7484;
+  font-size: 1.4rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-right: 10px;
+}
+
+.job-title-and-info .buttons .save svg {
+  height: 18px;
+  margin-left: 10px;
+}
+
+.job-title-and-info .buttons .save:hover {
+  color: #ffffff;
+  background: #246df8;
+  border-color: #246df8;
+}
+
+.responsibilities ul,
+.edication-and-experience ul,
+.other-benifit ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 0;
+}
+
+.responsibilities ul li,
+.edication-and-experience ul li,
+.other-benifit ul li {
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #6f7484;
+  position: relative;
+  padding-left: 20px;
+}
+
+.responsibilities ul li:before,
+.edication-and-experience ul li:before,
+.other-benifit ul li:before {
+  position: absolute;
+  content: '\f058';
+  font-family: 'Font Awesome\ 5 Free';
+  font-weight: 900;
+  top: 2px;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.responsibilities ul li + li,
+.edication-and-experience ul li + li,
+.other-benifit ul li + li {
+  margin-top: 8px;
+}
+
+.job-apply-buttons a {
+  padding: 14px 30px;
+  border-radius: 3px;
+  border: 1px solid;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.job-apply-buttons .apply {
+  background: #246df8;
+  color: #ffffff;
+  border-color: #246df8;
+  margin-right: 10px;
+}
+
+.job-apply-buttons .email {
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(247, 249, 252, 0)), to(#f7f9fc));
+  background-image: -webkit-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: -o-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: linear-gradient(to left, rgba(247, 249, 252, 0), #f7f9fc);
+  color: #6f7484;
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.job-apply-buttons .email:hover {
+  color: #ffffff;
+  background: #246df8;
+  border-color: #246df8;
+}
+
+.job-apply-buttons .email svg {
+  height: 15px;
+}
+
+.job-summary {
+  padding: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(247, 249, 252, 0)), to(#f7f9fc));
+  background-image: -webkit-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: -o-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: linear-gradient(to left, rgba(247, 249, 252, 0), #f7f9fc);
+}
+
+.job-summary h4 {
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.job-summary ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: 0;
+}
+
+.job-summary ul li {
+  font-size: 1.4rem;
+  color: #6f7484;
+}
+
+.job-summary ul li span {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  margin-right: 5px;
+  color: #232630;
+}
+
+.job-summary ul li + li {
+  margin-top: 8px;
+}
+
+.share-job-post {
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(247, 249, 252, 0)), to(#f7f9fc));
+  background-image: -webkit-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: -o-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: linear-gradient(to left, rgba(247, 249, 252, 0), #f7f9fc);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  margin-top: 50px;
+  padding: 12px 30px;
+}
+
+.share-job-post .share {
+  font-size: 1.4rem;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.share-job-post .share i {
+  margin-right: 10px;
+}
+
+.share-job-post a {
+  margin-right: 12px;
+  color: #6f7484;
+}
+
+.share-job-post a:hover {
+  color: #246df8;
+}
+
+.information-and-share .buttons {
+  margin-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.information-and-share .buttons .button {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
+.information-and-share .buttons .print,
+.information-and-share .buttons .report {
+  padding: 12px 5px;
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  width: calc(50% - 10px);
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(247, 249, 252, 0)), to(#f7f9fc));
+  background-image: -webkit-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: -o-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: linear-gradient(to left, rgba(247, 249, 252, 0), #f7f9fc);
+}
+
+.information-and-share .buttons .print svg,
+.information-and-share .buttons .report svg {
+  height: 15px;
+}
+
+.information-and-share .buttons .print:hover,
+.information-and-share .buttons .report:hover {
+  border-color: rgba(36, 109, 248, 0.2);
+  color: #246df8;
+}
+
+.information-and-share .job-location {
+  background-image: -webkit-gradient(linear, right top, left top, from(rgba(247, 249, 252, 0)), to(#f7f9fc));
+  background-image: -webkit-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: -o-linear-gradient(right, rgba(247, 249, 252, 0), #f7f9fc);
+  background-image: linear-gradient(to left, rgba(247, 249, 252, 0), #f7f9fc);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  margin-top: 50px;
+  padding: 30px;
+}
+
+.information-and-share .job-location h4 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.information-and-share .job-location .cp-map {
+  height: 250px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.job-apply-buttons {
+  margin-top: 45px;
+}
+
+.job-apply-buttons a {
+  margin-top: 15px;
+}
+.details-section {
+  padding-left: 30px;
+}
+
+.details-section h4 {
+  font-size: 1.8rem;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.details-section h4 svg {
+  height: 22px;
+  position: absolute;
+  top: 0;
+  left: -30px;
+  color: #828794;
+}
+
+.details-section p {
+  color: #6f7484;
+}
+
+.details-section p + p {
+  margin-top: 20px;
+}
+
+.details-section + .details-section {
+  margin-top: 60px;
+}
+
+@media all and (max-width: 767px) {
+  h1 {
+    font-size: 4.8rem;
+  }
+  h2 {
+    font-size: 3.6rem;
+  }
+  h3 {
+    font-size: 3.2rem;
+  }
+  h4 {
+    font-size: 2.4rem;
+  }
+}
+    @media all and (max-width: 575px) {
+  .job-listing-details {
+    padding: 20px;
+  }
+}
+    </style>
+
+    <div class="job-details-bg padding-top-60 section-padding-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="job-listing-details">
+              <div class="job-title-and-info">
+                <div class="title">
+                  <div class="thumb">
+                    <img src="{% static job_detail.image %}" class="img-fluid" alt="">
+                  </div>
+                  <div class="title-body">
+                    <h4>{{ job_detail.position }}</h4>
+                    <div class="job-info">
+                      <span class="office-location"><i class="fas fa-map-marker-alt"></i>{{ job_detail.location }}</span>
+                        <span class="job-type {{ job_detail.format_int.time }}-time"><i class="fas fa-clock"></i>{{ job_detail.format_int.text }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="buttons">
+                    <a class="save" href="mailto:?subject={{ job_detail.position|urlencode }}&message={{ job_detail.position|urlencode }}%20job%20vacancy%20in%20Uptechsys%20here%20https://uptechsys.com{% url 'job-detail' job_detail.id %}"><i class="far fa-envelope"></i> Email Job</a>
+                  <a class="apply" id="applyJob">Apply Online</a>
+                </div>
+              </div>
+              <div class="details-information section-padding-60">
+                <div class="row">
+                  <div class="col-xl-7 col-lg-8">
+                    <div class="description details-section">
+                      <h4><i class="fas fa-align-left"></i>Job Description</h4>
+                        <p>{{ job_detail.description_long }}</p>
+                    </div>
+                    <div class="responsibilities details-section">
+                      <h4><i class="fas fa-bolt"></i>Responsibilities</h4>
+                      <ul>
+                        {% for responsibility in job_detail.format_list.responsibilities %}
+                        <li>{{ responsibility }}</li>
+                          {% endfor %}
+                      </ul>
+                    </div>
+                    <div class="edication-and-experience details-section">
+                      <h4><i class="fas fa-graduation-cap"></i>Education + Experience</h4>
+                      <ul>
+                        {% for education in job_detail.format_list.educations %}
+                        <li>{{ education }}</li>
+                          {% endfor %}
+                      {% for experience in job_detail.format_list.experiences_detail %}
+                      <li>{{ experience }}</li>
+                      {% endfor %}
+                      </ul>
+                    </div>
+                    <div class="other-benifit details-section">
+                      <h4><i class="fas fa-gift"></i>Other Benefits</h4>
+                      <ul>
+                          {% for benefit in job_detail.format_list.benefits %}
+                        <li>{{ benefit }}</li>
+                          {% endfor %}
+                      </ul>
+                    </div>
+                    <div class="job-apply-buttons">
+                        <a class="apply" href="#" id="applyJob">Apply Online</a>
+                      <a class="email" href="mailto:?subject={{ job_detail.position|urlencode }}&message={{ job_detail.position|urlencode }}%20job%20vacancy%20in%20Uptechsys%20here%20https://uptechsys.com{% url 'job-detail' job_detail.id %}"><i class="far fa-envelope"></i> Email Job</a>
+                    </div>
+                  </div>
+                  <div class="col-xl-4 offset-xl-1 col-lg-4">
+                    <div class="information-and-share">
+                      <div class="job-summary">
+                        <h4>Job Summary</h4>
+                        <ul>
+                          <li><span>Published on:</span> {{ job_detail.date_posted|date }}</li>
+                          <li><span>Vacancy:</span> {{ job_detail.vacancy }}</li>
+                          <li><span>Employment Status:</span> {{ job_detail.format_level.text }}</li>
+                          <li><span>Experience:</span> {{ job_detail.experience }}</li>
+                          <li><span>Job Location:</span> {{ job_detail.location }}</li>
+                          <li><span>Salary:</span> {% if job_detail.salary %}{{ job_detail.salary }}{% else %}Negotiable{% endif %}</li>
+                          <li><span>Gender:</span> {%  if job_detail.gender == 1 %}Female{% elif job_detail.gender ==  2 %}Male{% else %}All{% endif %}</li>
+                          <li><span>Application Deadline:</span> {{ job_detail.deadline|date }}</li>
+                        </ul>
+                      </div>
+                      <div class="share-job-post">
+                        <span class="share"><i class="fas fa-share-alt"></i> Share:</span>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                      </div>
+                      <div class="buttons">
+                        <a href="javascript:print()" class="button print"><i class="fas fa-print"></i> Print Job</a>
+                      </div>
+                      <div class="job-location">
+                        <h4>Job Location</h4>
+                        <div id="map-area">
+                          <div class="cp-map" id="location" data-lat="40.713355" data-lng="-74.005535" data-zoom="10"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="applyJobModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="wizard-title">Apply for {{ job_detail.position }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#bio" role="tab">Bio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#education" role="tab">Education</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#works" role="tab">Works</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#skills" role="tab">Skills</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#questions" role="tab">Question</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#additional" role="tab">Additional</a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#review" role="tab">Review</a>
+          </li>
+        </ul>
+
+        <div class="tab-content mt-2">
+          <div class="tab-pane fade show active" id="bio" role="tabpanel">
+            <h4>Information</h4>
+              <div class="form-group row mb-3">
+                  <div class="col-xl-6 mb-3">
+                      <label for="first_name" class="form-control-label">First Name<span class="text-danger ml-2">*</span></label>
+                      <input id="last_name" type="text" value="David Green" class="form-control">
+                  </div>
+
+                  <div class="col-xl-6">
+                      <label for="last_name" class="form-control-label">Last Name<span class="text-danger ml-2">*</span></label>
+                      <input id="last_name" type="email" value="dgreen@elisyam.com" class="form-control">
+                  </div>
+              </div>
+
+              <div class="form-group row mb-3">
+                  <div class="col-xl-6 mb-3">
+                      <label for="email" class="form-control-label">Email address<span class="text-danger ml-2">*</span></label>
+                      <input id="email" type="text" value="David Green" class="form-control">
+                  </div>
+
+                  <div class="col-xl-6">
+                      <label for="phone_number" class="form-control-label">Phone number<span class="text-danger ml-2">*</span></label>
+                      <input id="phone_number" type="email" value="" class="form-control">
+                  </div>
+              </div>
+
+              <div class="form-group row mb-3">
+                  <div class="col-xl-6 mb-3">
+                      <label for="address_1" class="form-control-label">Address 1<span class="text-danger ml-2">*</span></label>
+                      <input id="address_1" type="text" value="David Green" class="form-control">
+                  </div>
+                  <div class="col-xl-6">
+                      <label for="address_2" class="form-control-label">Address 2<span class="text-danger ml-2">*</span></label>
+                      <input id="address_2" type="email" value="" class="form-control">
+                  </div>
+              </div>
+            <button class="btn btn-secondary" id="bioContinue">Continue</button>
+          </div>
+
+          <div class="tab-pane fade" id="education" role="tabpanel">
+              <h4>Education</h4>
+                <div class="form-group row mb-3">
+                <div class="col-xl-4 mb-3">
+                <label for="education_institute_1" class="form-control-label">Institute<span class="text-danger ml-2">*</span></label>
+                <input id="education_institute_1" type="text" value="" class="form-control" required>
+                </div>
+                <div class="col-xl-4 mb-5">
+                <label for="education_level_1" class="form-control-label">Education level<span class="text-danger ml-2">*</span></label>
+                <input id="education_level_1" type="email" value="" class="form-control" required>
+                </div>
+                <div class="col-xl-4">
+                <label for="education_grade_1" class="form-control-label">Graduation Date<span class="text-danger ml-2">*</span> <small>2019 - present</small></label>
+                <input id="education_grade_1" type="text" value="" class="form-control">
+                </div>
+                </div>
+
+
+
+              <div class="form-group row mb-3">
+                <div class="col-xl-4 mb-3">
+                <label for="education_institute_2" class="form-control-label">Institute<span class="text-danger ml-2">*</span></label>
+                <input id="education_institute_2" type="text" value="" class="form-control" required>
+                </div>
+                <div class="col-xl-4 mb-5">
+                <label for="education_level_2" class="form-control-label">Education level<span class="text-danger ml-2">*</span></label>
+                <input id="education_level_2" type="email" value="" class="form-control" required>
+                </div>
+                <div class="col-xl-4">
+                <label for="education_grade_2" class="form-control-label">Graduation Date<span class="text-danger ml-2">*</span> <small>2019 - present</small></label>
+                <input id="education_grade_2" type="text" value="" class="form-control">
+                </div>
+                </div>
+
+
+              <div class="form-group row mb-3">
+                <div class="col-xl-4 mb-3">
+                <label for="education_institute_3" class="form-control-label">Institute<span class="text-danger ml-2">*</span></label>
+                <input id="education_institute_3" type="text" value="" class="form-control" required>
+                </div>
+                <div class="col-xl-4 mb-5">
+                <label for="education_level_3" class="form-control-label">Education level<span class="text-danger ml-2">*</span></label>
+                <input id="education_level_1" type="email" value="" class="form-control" required>
+                </div>
+                <div class="col-xl-4">
+                <label for="education_grade_3" class="form-control-label">Graduation Date<span class="text-danger ml-2">*</span> <small>2019 - present</small></label>
+                <input id="education_grade_3" type="text" value="" class="form-control">
+                </div>
+                </div>
+            <button class="btn btn-secondary" id="educationContinue">Continue</button>
+          </div>
+          <div class="tab-pane fade" id="works" role="tabpanel">
+            <h4>Placement</h4>
+            <div id="accordion" class="mb-3" role="tablist" aria-multiselectable="true">
+              <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Entire Venue
+                    </a>
+                  </h5>
+                </div>
+
+                <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="card-block">
+                    <div class="form-group">
+                      <label for="venueSelect">Select a Venue</label>
+                      <select class="form-control" id="venueSelect">
+                        <option selected disabled>Choose a venue</option>
+                        <option>Venue 1</option>
+                        <option>Venue 2</option>
+                        <option>Venue 3</option>
+                        <option>Venue 4</option>
+                        <option>Venue 5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" role="tab" id="headingTwo">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Specific Kiosks
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="card-block">
+                    <div class="form-group">
+                      <label for="kioskSelectVenue">First, choose a venue.</label>
+                      <select class="form-control" id="kioskSelectVenue">
+                        <option selected disabled>Choose a venue</option>
+                        <option>Venue 1</option>
+                        <option>Venue 2</option>
+                        <option>Venue 3</option>
+                        <option>Venue 4</option>
+                        <option>Venue 5</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleSelect2">Then select kiosks (you can select multiple)</label>
+                      <select multiple class="form-control" id="exampleSelect2">
+                        <option>Kiosk 1</option>
+                        <option>Kiosk 2</option>
+                        <option>Kiosk 3</option>
+                        <option>Kiosk 4</option>
+                        <option>Kiosk 5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" role="tab" id="headingThree">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Specific Screens
+                    </a>
+                  </h5>
+                </div>
+                <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="card-block">
+                    <div class="form-group">
+                      <label for="kioskSelectVenue">First, choose a venue.</label>
+                      <select class="form-control" id="kioskSelectVenue">
+                        <option selected disabled>Choose a venue</option>
+                        <option>Venue 1</option>
+                        <option>Venue 2</option>
+                        <option>Venue 3</option>
+                        <option>Venue 4</option>
+                        <option>Venue 5</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleSelect2">Then select screens (you can select multiple)</label>
+                      <select multiple class="form-control" id="exampleSelect2">
+                        <option>Kiosk 1 - Screen 1</option>
+                        <option>Kiosk 1 - Screen 2</option>
+                        <option>Kiosk 2 - Screen 1</option>
+                        <option>Kiosk 2 - Screen 2</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-secondary" id="placementContinue">Continue</button>
+          </div>
+          <div class="tab-pane fade" id="schedulePanel" role="tabpanel">
+            <h4>Schedule</h4>
+            <div id="scheduleAccordion" class="mb-3" role="tablist" aria-multiselectable="true">
+              <div class="card">
+                <div class="card-header" role="tab" id="headingOne">
+                  <h5 class="mb-0">
+                    <a data-toggle="collapse" data-parent="#scheduleAccordion" href="#scheduleAccordioncollapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Start and Stop Date
+                    </a>
+                  </h5>
+                </div>
+
+                <div id="scheduleAccordioncollapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="card-block">
+                    <div class="form-group row">
+                      <label for="example-date-input" class="col-2 col-form-label">Start Date</label>
+                      <div class="col-10">
+                        <input class="form-control" type="date" value="2018-01-09" id="start-date">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="example-date-input" class="col-2 col-form-label">Stop Date</label>
+                      <div class="col-10">
+                        <input class="form-control" type="date" value="2018-01-09" id="stop-date">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" role="tab" id="headingTwo">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#scheduleAccordion" href="#scheduleAccordioncollapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Rules for Specific Days
+                    </a>
+                  </h5>
+                </div>
+                <div id="scheduleAccordioncollapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="card-block">
+                    <h6>Play on the following days (check all that apply)</h6>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="sunday">
+                        Sunday
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="monday">
+                        Monday
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="tuesday">
+                        Tuesday
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="wednesday">
+                        Wednesday
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="thursday">
+                        Thursday
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="friday">
+                        Friday
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="saturday">
+                        Saturday
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header" role="tab" id="headingThree">
+                  <h5 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#scheduleAccordion" href="#scheduleAccordioncollapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Rules for Specific Times
+                    </a>
+                  </h5>
+                </div>
+                <div id="scheduleAccordioncollapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="card-block">
+                    <h6>Play during the following timeframes (applies to each day)</h6>
+                    <div class="form-group row">
+                      <label for="example-time-input" class="col-2 col-form-label">Start Time</label>
+                      <div class="col-10">
+                        <input class="form-control" type="time" value="13:45:00" id="start-time">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="example-time-input" class="col-2 col-form-label">End Time</label>
+                      <div class="col-10">
+                        <input class="form-control" type="time" value="13:45:00" id="end-time">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-secondary" id="scheduleContinue">Continue</button>
+          </div>
+          <div class="tab-pane fade" id="reviewPanel" role="tabpanel">
+            <h4>Review</h4>
+            <button class="btn btn-primary btn-block" id="activate">Activate this Campaign!</button>
+          </div>
+        </div>
+        <div class="progress mt-5">
+          <div class="progress-bar" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">Step 1 of 5</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Save for later</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {% block scripts %}
+    {{ block.super }}
+    <script>
+$(function () {
+    $('#applyJob').click(function() {
+        $('#applyJobModal').modal({
+            backdrop: 'static'
+        });
+    });
+
+  $('#bioContinue').click(function (e) {
+    e.preventDefault();
+    $('.progress-bar').css('width', '40%');
+    $('.progress-bar').html('Step 2 of 5');
+    $('#myTab a[href="#education"]').tab('show');
+  });
+
+  $('#adsContinue').click(function (e) {
+    e.preventDefault();
+    $('.progress-bar').css('width', '60%');
+    $('.progress-bar').html('Step 3 of 5');
+    $('#myTab a[href="#placementPanel"]').tab('show');
+  });
+
+  $('#placementContinue').click(function (e) {
+    e.preventDefault();
+    $('.progress-bar').css('width', '80%');
+    $('.progress-bar').html('Step 4 of 5');
+    $('#myTab a[href="#schedulePanel"]').tab('show');
+  });
+
+  $('#scheduleContinue').click(function (e) {
+    e.preventDefault();
+    $('.progress-bar').css('width', '100%');
+    $('.progress-bar').html('Step 5 of 5');
+    $('#myTab a[href="#reviewPanel"]').tab('show');
+  });
+
+  $('#activate').click(function (e) {
+    e.preventDefault();
+    var formData = {
+      campaign_name: $('#campaignName').val(),
+      start_date: $('#start-date').val(),
+      end_date: $('#end-date').val(),
+      days: {
+        sunday: $('#sunday').prop('checked'),
+        monday: $('#monday').prop('checked'),
+        tuesday: $('#tuesday').prop('checked'),
+        wednesday: $('#wednesday').prop('checked'),
+        thurday: $('#thursday').prop('checked'),
+        friday: $('#friday').prop('checked'),
+        saturday: $('#saturday').prop('checked'),
+      },
+      start_time: $('#start-time').val(),
+      end_time: $('#end-time').val()
+    }
+    alert(JSON.stringify(formData));
+  })
+})</script>
+    {% endblock %}
+
+{% endblock contents %}

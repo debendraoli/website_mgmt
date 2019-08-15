@@ -1,0 +1,105 @@
+{% extends 'website/layout.html' %}
+{% load static %}
+{% block contents %}
+    <section id="contact" class="contact_area section_gap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="contact_info">
+                            <div class="info_item" data-aos="zoom-in-right">
+                                <i class="lnr lnr-home"></i>
+                                <h6>{{ site_info.process_info.addresses.address_1 }}, {{ site_info.process_info.addresses.country }}</h6>
+                                <p>{{ site_info.process_info.addresses.address_2 }}</p>
+                            </div>
+                            <div class="info_item" data-aos="zoom-in-right" data-aos-delay="700">
+                                <i class="lnr lnr-phone-handset"></i>
+                                <h6><a href="tel:{{ site_info.contact_number }}">{{ site_info.contact_number }}</a></h6>
+                                <p>{{ site_info.start_day }} to {{ site_info.end_day }} {{ site_info.opening_time|time:"H" }} to {{ site_info.closing_time|time:"H" }}</p>
+                            </div>
+                            <div class="info_item" data-aos="zoom-in-right" data-aos-delay="1200">
+                                <i class="lnr lnr-envelope"></i>
+                                <h6><a href="mail-to:{{ site_info.contact_number }}">{{ site_info.email }}</a></h6>
+                                <p>Send us your query anytime!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <form class="row contact_form" action="" method="post" id="contactForm" novalidate="novalidate">
+                            {% csrf_token %}
+                            <div class="col-md-6">
+                                <div class="form-group" data-aos="flip-left" data-aos-delay="300">
+                                    {{ form.name }}
+                                </div>
+                                <div class="form-group" data-aos="flip-left" data-aos-delay="600">
+                                    {{ form.email }}
+                                </div>
+                                <div class="form-group" data-aos="flip-left" data-aos-delay="900">
+                                    {{ form.subject }}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group" data-aos="flip-left" data-aos-delay="1200">
+                                    {{ form.message }}
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-right" data-aos="flip-left" data-aos-delay="1200">
+                                <button type="submit" value="submit" class="primary_btn"><span>Send Message</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div id="mapBox" class="mapBox"
+                     data-aos="flip-up"
+                     data-aos-delay="1300"
+                     data-lat="27.722108"
+                     data-lon="85.334947"
+                     data-zoom="13"
+                     data-info="UptechSys LTD."
+                     data-mlat="27.722108"
+                     data-mlon="85.334947">
+                </div>
+            </div>
+    </section>
+
+    <div id="success" class="modal modal-message fade" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<i class="far fa-times-circle"></i>
+</button>
+<h2>Thank you</h2>
+<p>Your message is successfully sent...</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="error" class="modal modal-message fade" role="dialog">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<i class="far fa-times-circle"></i>
+</button>
+<h2>Sorry !</h2>
+<p> Something went wrong </p>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock contents %}
+{% block scripts %}
+    {{ block.super }}
+    <script>$("#contact-float").hide();</script>
+    <!-- contact js -->
+    <script src="{% static 'js/mail-script.js' %}"></script>
+
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/contact.js' %}"></script>
+    <!--gmaps Js-->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChXFTfDoFbSili1rlT1nNWeo7EuMU1v7g"></script>
+    <script src="{% static 'js/gmaps.min.js' %}"></script>
+{% endblock %}
